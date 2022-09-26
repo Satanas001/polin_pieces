@@ -34,6 +34,10 @@ class User
     #[ORM\Column]
     private ?bool $isEnabled = null;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Company $company = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -111,7 +115,7 @@ class User
         return $this;
     }
 
-    public function isIsEnabled(): ?bool
+    public function isEnabled(): ?bool
     {
         return $this->isEnabled;
     }
@@ -122,4 +126,17 @@ class User
 
         return $this;
     }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): self
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
 }
