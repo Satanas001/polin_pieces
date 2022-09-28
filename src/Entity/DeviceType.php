@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\DocumentRepository;
+use App\Repository\DeviceTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DocumentRepository::class)]
-class Document
+#[ORM\Entity(repositoryClass: DeviceTypeRepository::class)]
+class DeviceType
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,13 +16,13 @@ class Document
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $filename = null;
+    private ?string $designation = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'deviceTypes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?DocumentCategory $category = null;
+    private ?Category $category = null;
 
-    #[ORM\ManyToMany(targetEntity: DeviceModel::class, mappedBy: 'documents')]
+    #[ORM\OneToMany(mappedBy: 'deviceType', targetEntity: DeviceModel::class)]
     private Collection $deviceModels;
 
     public function __construct()
@@ -35,24 +35,24 @@ class Document
         return $this->id;
     }
 
-    public function getFilename(): ?string
+    public function getDesignation(): ?string
     {
-        return $this->filename;
+        return $this->designation;
     }
 
-    public function setFilename(string $filename): self
+    public function setDesignation(string $designation): self
     {
-        $this->filename = $filename;
+        $this->designation = $designation;
 
         return $this;
     }
 
-    public function getCategory(): ?DocumentCategory
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?DocumentCategory $category): self
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
 
@@ -71,7 +71,7 @@ class Document
     {
         if (!$this->deviceModels->contains($deviceModel)) {
             $this->deviceModels->add($deviceModel);
-            $deviceModel->addDocument($this);
+            $deviceModel->setDeviceType($this);
         }
 
         return $this;
@@ -80,7 +80,10 @@ class Document
     public function removeDeviceModel(DeviceModel $deviceModel): self
     {
         if ($this->deviceModels->removeElement($deviceModel)) {
-            $deviceModel->removeDocument($this);
+            // set the owning side to null (unless already changed)
+            if ($deviceModel->getDeviceType() === $this) {
+                $deviceModel->setDeviceType(null);
+            }
         }
 
         return $this;
