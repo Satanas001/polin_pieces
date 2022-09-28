@@ -25,9 +25,13 @@ class DeviceModel
     #[ORM\ManyToMany(targetEntity: Document::class, inversedBy: 'deviceModels')]
     private Collection $documents;
 
+    #[ORM\ManyToMany(targetEntity: SparePart::class, mappedBy: 'device')]
+    private Collection $spareParts;
+
     public function __construct()
     {
         $this->documents = new ArrayCollection();
+        $this->spareParts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,6 +83,33 @@ class DeviceModel
     public function removeDocument(Document $document): self
     {
         $this->documents->removeElement($document);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SparePart>
+     */
+    public function getSpareParts(): Collection
+    {
+        return $this->spareParts;
+    }
+
+    public function addSparePart(SparePart $sparePart): self
+    {
+        if (!$this->spareParts->contains($sparePart)) {
+            $this->spareParts->add($sparePart);
+            $sparePart->addDevice($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSparePart(SparePart $sparePart): self
+    {
+        if ($this->spareParts->removeElement($sparePart)) {
+            $sparePart->removeDevice($this);
+        }
 
         return $this;
     }

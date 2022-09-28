@@ -7,19 +7,15 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20220928085729 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Creation of table category, device_model, device_type and device_model_document';
     }
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, designation VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE device_model (id INT AUTO_INCREMENT NOT NULL, device_type_id INT NOT NULL, designation VARCHAR(50) NOT NULL, INDEX IDX_111092BE4FFA550E (device_type_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE device_model_document (device_model_id INT NOT NULL, document_id INT NOT NULL, INDEX IDX_B4FE2A65F741EEC7 (device_model_id), INDEX IDX_B4FE2A65C33F7837 (document_id), PRIMARY KEY(device_model_id, document_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -32,7 +28,6 @@ final class Version20220928085729 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE device_model DROP FOREIGN KEY FK_111092BE4FFA550E');
         $this->addSql('ALTER TABLE device_model_document DROP FOREIGN KEY FK_B4FE2A65F741EEC7');
         $this->addSql('ALTER TABLE device_model_document DROP FOREIGN KEY FK_B4FE2A65C33F7837');
