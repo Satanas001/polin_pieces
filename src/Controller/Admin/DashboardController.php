@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Entity\Company;
 use App\Entity\DeviceModel;
 use App\Entity\DeviceType;
 use App\Entity\Document;
@@ -68,6 +69,11 @@ class DashboardController extends AbstractDashboardController
         ]) ;
 
         yield MenuItem::section('Utilisateurs') ;
+
+        yield MenuItem::subMenu('Sociétés', 'fa-regular fa-building')->setSubItems([
+            menuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', Company::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Liste', 'fa-solid fa-eye', Company::class),
+        ]) ;
 
         yield MenuItem::section('Devis') ;
 

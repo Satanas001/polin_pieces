@@ -25,7 +25,7 @@ class Company
     private ?string $address = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    private ?string $additionalAdress = null;
+    private ?string $additionalAddress = null;
 
     #[ORM\Column(length: 5)]
     private ?string $postalCode = null;
@@ -48,7 +48,7 @@ class Company
 
     public function getCompanyName(): ?string
     {
-        return $this->companyName;
+        return mb_strtoupper($this->companyName);
     }
 
     public function setCompanyName(string $companyName): self
@@ -82,14 +82,14 @@ class Company
         return $this;
     }
 
-    public function getAdditionalAdress(): ?string
+    public function getAdditionalAddress(): ?string
     {
-        return $this->additionalAdress;
+        return $this->additionalAddress;
     }
 
-    public function setAdditionalAdress(?string $additionalAdress): self
+    public function setAdditionalAddress(?string $additionalAdress): self
     {
-        $this->additionalAdress = $additionalAdress;
+        $this->additionalAddress = $additionalAdress;
 
         return $this;
     }
@@ -108,7 +108,7 @@ class Company
 
     public function getCity(): ?string
     {
-        return $this->city;
+        return mb_strtoupper($this->city);
     }
 
     public function setCity(string $city): self
