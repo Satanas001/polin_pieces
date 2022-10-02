@@ -2,6 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Document;
+use App\Entity\DocumentCategory;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud ;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -35,7 +38,16 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
-        yield MenuItem::section('Documents') ;
+        yield MenuItem::section('Documentation') ;
+
+        yield MenuItem::subMenu('Catégorie', 'fa-solid fa-bars')->setSubItems([
+            menuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', DocumentCategory::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Liste', 'fa-solid fa-eye', DocumentCategory::class),
+        ]) ;
+        yield MenuItem::subMenu('Documents', 'fa-regular fa-folder-open')->setSubItems([
+            menuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', Document::class)->setAction(Crud::PAGE_NEW),
+            menuItem::linkToCrud('Liste','fa-solid fa-eye', Document::class),
+        ]) ;
 
         yield MenuItem::section('Matériel') ;
 
