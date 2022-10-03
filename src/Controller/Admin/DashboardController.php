@@ -2,11 +2,12 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Category;
+use App\Entity\User;
 use App\Entity\Company;
-use App\Entity\DeviceModel;
-use App\Entity\DeviceType;
+use App\Entity\Category;
 use App\Entity\Document;
+use App\Entity\DeviceType;
+use App\Entity\DeviceModel;
 use App\Entity\DocumentCategory;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -73,6 +74,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::subMenu('Sociétés', 'fa-regular fa-building')->setSubItems([
             menuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', Company::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Liste', 'fa-solid fa-eye', Company::class),
+        ]) ;
+        yield MenuItem::subMenu('Utilisateurs', 'fa-solid fa-users')->setSubItems([
+            menuItem::linkToCrud('Ajouter','fa-solid fa-plus', User::class)->setAction(Crud::PAGE_NEW),
+            menuItem::linkToCrud('Liste','fa-solid fa-eye', User::class),
         ]) ;
 
         yield MenuItem::section('Devis') ;
