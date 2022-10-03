@@ -16,6 +16,9 @@ class DocumentCategory
     #[ORM\Column(length: 50)]
     private ?string $designation = null;
 
+    #[ORM\Column]
+    private ?bool $active = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -36,5 +39,17 @@ class DocumentCategory
     public function __toString()
     {
         return $this->getDesignation() ;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
     }
 }

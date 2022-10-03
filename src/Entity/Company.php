@@ -36,6 +36,9 @@ class Company
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: User::class)]
     private Collection $users;
 
+    #[ORM\Column]
+    private ?bool $active = true;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -151,5 +154,17 @@ class Company
     public function __toString()
     {
         return $this->getCompanyName() ;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
     }
 }

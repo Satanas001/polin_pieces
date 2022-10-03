@@ -28,6 +28,9 @@ class DeviceModel
     #[ORM\ManyToMany(targetEntity: SparePart::class, mappedBy: 'device')]
     private Collection $spareParts;
 
+    #[ORM\Column]
+    private ?bool $active = true;
+
     public function __construct()
     {
         $this->documents = new ArrayCollection();
@@ -116,5 +119,17 @@ class DeviceModel
 
     public function __toString() {
         return $this->getDesignation() ;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
     }
 }

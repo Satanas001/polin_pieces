@@ -36,8 +36,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $phone = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $status = 0;
+    #[ORM\Column]
+    private ?bool $status = true;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Company $company = null;

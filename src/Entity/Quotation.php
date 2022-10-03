@@ -35,6 +35,9 @@ class Quotation
     #[ORM\OneToMany(mappedBy: 'quotation', targetEntity: QuotationPart::class)]
     private Collection $quotationParts;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $reference = null;
+
     public function __construct()
     {
         $this->quotationParts = new ArrayCollection();
@@ -131,6 +134,18 @@ class Quotation
                 $quotationPart->setQuotation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(?string $reference): self
+    {
+        $this->reference = $reference;
 
         return $this;
     }

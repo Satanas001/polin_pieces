@@ -25,6 +25,9 @@ class DeviceType
     #[ORM\OneToMany(mappedBy: 'deviceType', targetEntity: DeviceModel::class)]
     private Collection $deviceModels;
 
+    #[ORM\Column]
+    private ?bool $active = true;
+
     public function __construct()
     {
         $this->deviceModels = new ArrayCollection();
@@ -92,5 +95,17 @@ class DeviceType
     public function __toString()
     {
         return $this->getDesignation() ;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
     }
 }
