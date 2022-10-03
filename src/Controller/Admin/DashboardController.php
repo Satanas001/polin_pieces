@@ -9,6 +9,7 @@ use App\Entity\Document;
 use App\Entity\DeviceType;
 use App\Entity\DeviceModel;
 use App\Entity\DocumentCategory;
+use App\Entity\Quotation;
 use App\Entity\SparePart;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,45 +48,48 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Matériel') ;
 
         yield MenuItem::subMenu('Catégorie', 'fa-solid fa-bars')->setSubItems([
-            menuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', Category::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', Category::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Liste', 'fa-solid fa-eye', Category::class),
         ]) ;
         yield MenuItem::subMenu('Type', 'fa-solid fa-bars')->setSubItems([
-            menuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', DeviceType::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', DeviceType::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Liste', 'fa-solid fa-eye', DeviceType::class),
         ]) ;
         yield MenuItem::subMenu('Modèle', 'fa-solid fa-fan')->setSubItems([
-            menuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', DeviceModel::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', DeviceModel::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Liste', 'fa-solid fa-eye', DeviceModel::class),
         ]) ;
         yield MenuItem::subMenu('Pièces détachées', 'fa-solid fa-puzzle-piece')->setSubItems([
-            menuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', SparePart::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', SparePart::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Liste', 'fa-solid fa-eye', SparePart::class),
         ]) ;
 
         yield MenuItem::section('Documentation') ;
 
         yield MenuItem::subMenu('Catégorie', 'fa-solid fa-bars')->setSubItems([
-            menuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', DocumentCategory::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', DocumentCategory::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Liste', 'fa-solid fa-eye', DocumentCategory::class),
         ]) ;
         yield MenuItem::subMenu('Documents', 'fa-regular fa-folder-open')->setSubItems([
-            menuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', Document::class)->setAction(Crud::PAGE_NEW),
-            menuItem::linkToCrud('Liste','fa-solid fa-eye', Document::class),
+            MenuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', Document::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Liste','fa-solid fa-eye', Document::class),
         ]) ;
 
         yield MenuItem::section('Utilisateurs') ;
 
         yield MenuItem::subMenu('Sociétés', 'fa-regular fa-building')->setSubItems([
-            menuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', Company::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', Company::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Liste', 'fa-solid fa-eye', Company::class),
         ]) ;
         yield MenuItem::subMenu('Utilisateurs', 'fa-solid fa-users')->setSubItems([
-            menuItem::linkToCrud('Ajouter','fa-solid fa-plus', User::class)->setAction(Crud::PAGE_NEW),
-            menuItem::linkToCrud('Liste','fa-solid fa-eye', User::class),
+            MenuItem::linkToCrud('Ajouter','fa-solid fa-plus', User::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Liste','fa-solid fa-eye', User::class),
         ]) ;
 
         yield MenuItem::section('Devis') ;
+
+        yield MenuItem::linkToCrud('Liste','fa-solid fa-eye', Quotation::class) ;
+
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
