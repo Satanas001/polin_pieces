@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceuil{% endblock %}
+
+{% block body %}
+    <nav class="navbar">
+        <div class="container justify-content-end fixed-top">
+          <a class="navbar-brand text-uppercase fs-1 fw-bold " href="{{path('app_main')}}">Acceuil</a>
+        </div>
+      </nav>
+
+
+
+      <div class="container">
+
+        <div class=" row vh-100 align-items-center">
+
+     
+  
+        <div class="row">
+                    <!-- CATEGORIE -->
+                    <div class="col-md-12 col-lg-6 mb-4">
+       
+                        <div class="row">
+                            <div class="col-md-12 col-lg-6 ">
+                                <div class="bg-black p-md-5  m-1">
+                                    <p class="text-center fs-1 fw-bold text-white display-6 ">POLIN</p>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-6 ">
+                                <div class="bg-warning p-md-5    m-1">
+                                    <p class="text-center fw-bold fs-1 text-white display-6 ">RAM</p>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-6">
+                                <div class="bg-secondary p-md-5  bg-opacity-75  m-1">
+                                    <p class="text-center fw-bold fs-1 text-white display-6 ">MIXER</p>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-6 ">
+                                <div class="bg-success p-md-5 bg-opacity-75 m-1">
+                                    <p class="text-center fw-bold text-white display-6 ">TOILES</p>
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                        <!-- reference -->
+                       
+                    <div class=" text-center col-md-12 col-lg-6 align-self-center "> 
+                        <p class="my-sm-6 lead">Acceder directement à la rèférence :  </p>
+                    <input type="text" class="form-control text-center" placeholder="référence article">
+    
+                    <a href="{{ path('pro_ducts') }}"> <button type="button" class="btn btn-secondary mt-4 ">Enter</button></a> 
+                    </div> 
+                   
+        </div>
+        
+  </div>
+  </div>
+{% endblock %}

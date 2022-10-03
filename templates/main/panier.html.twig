@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+
+<nav class="navbar navbar-expand-lg bg-dark py-0 px-0 fixed-top">
+        <div class="container-fluid px-0  ">
+            <div> <a class="navbar-brand text-white mx-3 fw-bold fs-2 " href="#">PANIER</a></div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+           <ul class="navbar-nav ">
+                     <li class="nav-item active">
+                        <a class="nav-link bg-secondary px-5 text-white fw-bold fs-5 " href="{{path('profile')}}"><i class="fa-solid fa-user"></i>
+                          </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link bg-warning bg-opacity-50 px-5 text-white fw-bold fs-5"
+                            href="{{path('app_main')}}"><i class="fa-solid fa-house-chimney"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link bg-success bg-opacity-75 px-5 text-white fw-bold fs-5"
+                            href="{{path('panier')}}"><i class="fa-solid fa-cart-shopping"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link bg-light px-5 fw-bold fs-5"
+                            href="{{path('panier')}}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                    </li>
+    
+                </ul>
+
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- section cart  -->
+    <div class="container mt-5 mb-5 pt-3">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-8">
+                <div class="">
+                    <h4>POLIN</h4>
+                </div>
+                <h4>Matricule machine </h4>
+                <div class="d-flex flex-row justify-content-between align-items-center rounded">
+
+                    <div class="d-flex flex-column align-items-center "><span class="font-weight-bold">-
+                            Référence/libélé</span>
+
+                    </div>
+                    <div class=""><span>Quantité </span> <input type="number" class="bg-light w-25 mx-2"></div>
+                    <div>
+                        <h5 class="text-grey">Prix</h5>
+                    </div>
+                    <div class="d-flex align-items-center"><i class="fa fa-trash mb-1 text-danger"></i></div>
+                </div>
+                <div class="d-flex flex-row justify-content-between align-items-center rounded">
+
+                    <div class="d-flex flex-column align-items-center "><span class="font-weight-bold">-
+                            Référence/libélé</span>
+
+                    </div>
+                    <div class=""><span>Quantité </span> <input type="number" class="bg-light w-25 mx-2"></div>
+                    <div>
+                        <h5 class="text-grey">Prix</h5>
+                    </div>
+                    <div class="d-flex align-items-center"><i class="fa fa-trash mb-1 text-danger"></i></div>
+                </div>
+                <div class="d-flex flex-row justify-content-between align-items-center rounded">
+
+                    <div class="d-flex flex-column align-items-center "><span class="font-weight-bold">-
+                            Référence/libélé</span>
+
+                    </div>
+                    <div class=""><span>Quantité </span> <input type="number" class="bg-light w-25 mx-2"></div>
+                    <div>
+                        <h5 class="text-grey">Prix</h5>
+                    </div>
+                    <div class="d-flex align-items-center"><i class="fa fa-trash mb-1 text-danger"></i></div>
+                </div>
+
+            </div>
+            <!-- MIXER -->
+
+            <div class="col-md-8 mt-4">
+                <div class="">
+                    <h4>MIXER</h4>
+                </div>
+                <h4>Matricule machine </h4>
+                <div class="d-flex flex-row justify-content-between align-items-center rounded">
+
+                    <div class="d-flex flex-column align-items-center "><span class="font-weight-bold">-
+                            Référence/libélé</span>
+
+                    </div>
+                    <div class=""><span>Quantité </span> <input type="number" class="bg-light w-25 mx-2"></div>
+                    <div>
+                        <h5 class="text-grey">Prix</h5>
+                    </div>
+                    <div class="d-flex align-items-center"><i class="fa-regular fa-trash-can"></i></div>
+                </div>
+                <div class="d-flex flex-row justify-content-between align-items-center rounded">
+
+                    <div class="d-flex flex-column align-items-center "><span class="font-weight-bold">-
+                            Référence/libélé</span>
+
+                    </div>
+                    <div class=""><span>Quantité </span> <input type="number" class="bg-light w-25 mx-2"></div>
+                    <div>
+                        <h5 class="text-grey">Prix</h5>
+                    </div>
+                    <div class="d-flex align-items-center"><i class="fa-regular fa-trash-can"></i></div>
+                </div>
+                <div class="d-flex flex-row justify-content-between align-items-center rounded">
+
+                    <div class="d-flex flex-column align-items-center "><span class="font-weight-bold">-
+                            Référence/libélé</span>
+
+                    </div>
+                    <div class=""><span>Quantité </span> <input type="number" class="bg-light w-25 mx-2"></div>
+                    <div>
+                        <h5 class="text-grey">Prix</h5>
+                    </div>
+                    <div class="d-flex align-items-center"><i class="fa-regular fa-trash-can"></i></div>
+                </div>
+
+
+            </div>
+
+            <div class=" d-flex  justify-content-around m-5">
+                <div class="form-group">
+
+                    <textarea class="form-control " rows="7"
+                        placeholder=" Vous n’avez pas trouvé certains produits? Veuillez le préciser dans cette encart."></textarea>
+                </div>
+
+
+                <div class="align-self-center">
+                    <h4 class="">Prix public HT: 100 €</h4>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-sm-end justify-content-center flex-wrap ">
+                <div class="mx-2">
+                    <p>En cliquant sur «valider» une page mail s’ouvrira et regroupera toutes les références et
+                        quantitées demandées.</p>
+                </div>
+                <div class=""><button type="button" class="btn btn-warning btn-lg text-center ">Valider </button> </div>
+            </div>
+
+
+        </div>
+    </div>
+
+ {% endblock %}
