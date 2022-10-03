@@ -9,6 +9,7 @@ use App\Entity\Document;
 use App\Entity\DeviceType;
 use App\Entity\DeviceModel;
 use App\Entity\DocumentCategory;
+use App\Entity\SparePart;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud ;
@@ -56,6 +57,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::subMenu('Modèle', 'fa-solid fa-fan')->setSubItems([
             menuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', DeviceModel::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Liste', 'fa-solid fa-eye', DeviceModel::class),
+        ]) ;
+        yield MenuItem::subMenu('Pièces détachées', 'fa-solid fa-puzzle-piece')->setSubItems([
+            menuItem::linkToCrud('Ajouter', 'fa-solid fa-plus', SparePart::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Liste', 'fa-solid fa-eye', SparePart::class),
         ]) ;
 
         yield MenuItem::section('Documentation') ;
