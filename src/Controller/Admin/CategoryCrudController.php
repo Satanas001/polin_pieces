@@ -3,13 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class CategoryCrudController extends AbstractCrudController
 {
@@ -23,6 +23,7 @@ class CategoryCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Catégorie')
             ->setEntityLabelInPlural('Catégories')
+            ->setPageTitle('new', 'Ajouter une %entity_label_singular%')
             ;
     }
     
@@ -30,12 +31,15 @@ class CategoryCrudController extends AbstractCrudController
     {
         $id = IdField::new('id') ;
         $designation = TextField::new('designation', 'Désignation') ;
-        $activeCheckBox = BooleanField::new('active', 'Actif')
+        $formattedActive = BooleanField::new('active', 'Actif')
             ->setTemplatePath('admin/fields/active_field.html.twig') ;
         $active = BooleanField::new('active', 'Actif') ;
 
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$id, $designation, $activeCheckBox] ;
+            return [$id, $designation, $formattedActive] ;
+        }
+        elseif (Crud::PAGE_DETAIL === $pageName) {
+            return [$id, $formattedActive] ;
         }
         else {
             return [$designation, $active] ;
@@ -71,6 +75,12 @@ class CategoryCrudController extends AbstractCrudController
                 return $action
                     ->setIcon('fa-regular fa-trash-alt me-1 text-danger')
                     ->setLabel('Supprimer')
+                    ->displayIf(static function ($entity) {
+                        return !count($entity->getDeviceTypes()) ;
+                    }) ;
+            }) 
+            ->update(Crud::PAGE_DETAIL, Action::DELETE, function (Action $action) {
+                return $action
                     ->displayIf(static function ($entity) {
                         return !count($entity->getDeviceTypes()) ;
                     }) ;
