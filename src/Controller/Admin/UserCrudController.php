@@ -27,7 +27,10 @@ class UserCrudController extends AbstractCrudController
             TextField::new('name','Nom'),
             EmailField::new('email','Courriel'),
             TextField::new('password','Mot de Passe')->onlyOnForms(),
-            TelephoneField::new('phone','Téléphone'),
+            TelephoneField::new('phone','Téléphone')->onlyOnForms(),
+            TelephoneField::new('phone','Téléphone')
+                ->setTemplatePath('admin/fields/text_field.html.twig')
+                ->onlyOnIndex(),
             AssociationField::new('company', 'Société'),
             ArrayField::new('roles','Role'),
             BooleanField::new('status', 'Actif')
