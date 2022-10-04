@@ -30,7 +30,10 @@ class UserCrudController extends AbstractCrudController
             TelephoneField::new('phone','Téléphone'),
             AssociationField::new('company', 'Société'),
             ArrayField::new('roles','Role'),
-            BooleanField::new('status','actif'),
+            BooleanField::new('status', 'Actif')
+                ->setTemplatePath('admin/fields/active_field.html.twig')
+                ->onlyOnIndex(),
+            BooleanField::new('status', 'Actif')->onlyOnForms(),
         ];
     }
     

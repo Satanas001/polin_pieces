@@ -35,7 +35,10 @@ class SparePartCrudController extends AbstractCrudController
             ImageField::new('image', 'Image')
                 ->setBasePath(self::DOCUMENTS_BASE_PATH)
                 ->setUploadDir(self::DOCUMENTS_UPLOAD_DIR),
-            BooleanField::new('isEnabled','Actif'),
+            BooleanField::new('isEnabled', 'Actif')
+                ->setTemplatePath('admin/fields/active_field.html.twig')
+                ->onlyOnIndex(),
+            BooleanField::new('isEnabled', 'Actif')->onlyOnForms(),
             AssociationField::new('device','Modèle')
         ];
     }
