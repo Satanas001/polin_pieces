@@ -18,7 +18,7 @@ class Document
     #[ORM\Column(length: 50)]
     private ?string $filename = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'documents')]
     #[ORM\JoinColumn(nullable: false)]
     private ?DocumentCategory $category = null;
 
