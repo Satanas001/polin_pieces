@@ -38,16 +38,17 @@ class DocumentCrudController extends AbstractCrudController
                         'accept' => 'application/pdf'
                     ]
                 ])
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->hideWhenUpdating(),
             AssociationField::new('category', 'Catégorie'),
+            AssociationField::new('deviceModels','Modèles')
         ] ;
     }
 
     public function configureActions(Actions $actions): Actions
     {
         return $actions
-            ->add(Crud::PAGE_INDEX, Action::DETAIL)
-            ->disable(Action::EDIT);
+            ->add(Crud::PAGE_INDEX, Action::DETAIL);
     }
     
 }
