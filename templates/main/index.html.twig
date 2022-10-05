@@ -5,13 +5,14 @@
 {% block body %}
     <nav class="navbar">
         <div class="container justify-content-end fixed-top">
-          <a class="navbar-brand text-uppercase fs-1 fw-bold " href="{{path('app_main')}}">Acceuil</a>
+          <a class="navbar-brand text-uppercase fs-1 fw-bold " href="{{path('main_index')}}">Accueil</a>
         </div>
       </nav>
 
 
-
+ 
       <div class="container">
+
 
         <div class=" row vh-100 align-items-center">
 
@@ -19,29 +20,17 @@
   
         <div class="row">
                     <!-- CATEGORIE -->
-                    <div class="col-md-12 col-lg-6 mb-4">
-       
-                        <div class="row">
-                            <div class="col-md-12 col-lg-6 ">
-                                <div class="bg-black p-md-5  m-1">
-                                    <p class="text-center fs-1 fw-bold text-white display-6 ">POLIN</p>
+
+                    <div class="col-md-12 col-lg-6 mb-4 d-grid">
+                        <div class="row">              
+                 {% for category in categories %}
+                <div class="col-md-12 col-lg-6 text-bg-primary"> 
+                                <div class=" p-md-5   m-1">
+                                    <a href="#" class="text-center text-white fs-1 fw-bold display-6 ">{{ category.designation }}</a>
                                 </div>
-                            </div>
-                            <div class="col-md-12 col-lg-6 ">
-                                <div class="bg-warning p-md-5    m-1">
-                                    <p class="text-center fw-bold fs-1 text-white display-6 ">RAM</p>
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-lg-6">
-                                <div class="bg-secondary p-md-5  bg-opacity-75  m-1">
-                                    <p class="text-center fw-bold fs-1 text-white display-6 ">MIXER</p>
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-lg-6 ">
-                                <div class="bg-success p-md-5 bg-opacity-75 m-1">
-                                    <p class="text-center fw-bold text-white display-6 ">TOILES</p>
-                                </div>
-                            </div>
+                         </div>
+                    {% endfor %}
+                          
                             </div>
                     </div>
                         <!-- reference -->
@@ -50,11 +39,12 @@
                         <p class="my-sm-6 lead">Acceder directement à la rèférence :  </p>
                     <input type="text" class="form-control text-center" placeholder="référence article">
     
-                    <a href="{{ path('pro_ducts') }}"> <button type="button" class="btn btn-secondary mt-4 ">Enter</button></a> 
+                    <a href="#"> <button type="button" class="btn btn-secondary mt-4 ">Enter</button></a> 
                     </div> 
                    
-        </div>
+        </div> 
         
   </div>
   </div>
+  
 {% endblock %}

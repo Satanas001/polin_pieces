@@ -21,7 +21,7 @@ class SparePart
 
     #[ORM\Column(length: 100)]
     private ?string $designation = null;
-
+ 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
     private ?string $unitPrice = null;
 
