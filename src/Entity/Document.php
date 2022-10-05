@@ -22,7 +22,8 @@ class Document
     #[ORM\JoinColumn(nullable: false)]
     private ?DocumentCategory $category = null;
 
-    #[ORM\ManyToMany(targetEntity: DeviceModel::class, mappedBy: 'documents')]
+    // #[ORM\ManyToMany(targetEntity: DeviceModel::class, mappedBy: 'documents')]
+    #[ORM\ManyToMany(targetEntity: DeviceModel::class, inversedBy: 'documents')]
     private Collection $deviceModels;
 
     public function __construct()
