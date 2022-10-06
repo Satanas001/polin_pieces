@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
@@ -28,8 +29,8 @@ class DocumentCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('document')
             ->setEntityLabelInPlural('Documents')
             ->setPageTitle('new', 'Ajouter un %entity_label_singular%')
-            ->setPageTitle('edit', 'Modifier le %entity_label_singular%')
-            ->setPageTitle('detail', 'Document : %entity_as_string%')
+            ->setPageTitle('edit', 'Modifier le %entity_label_singular% <span class="text-info">« %entity_as_string% »</span>')
+            ->setPageTitle('detail', 'Document <span class="text-info">« %entity_as_string% »</span>')
             ;
     }
 
@@ -48,12 +49,14 @@ class DocumentCrudController extends AbstractCrudController
             ]) ;
         $category = AssociationField::new('category', 'Catégorie') ;
         $models = AssociationField::new('deviceModels','Modèles') ;
+        $formattedModels = CollectionField::new('deviceModels','Modèles')
+            ->setTemplatePath('admin/fields/list.html.twig') ;
         
         if (Crud::PAGE_INDEX === $pageName) {
             return [$id, $formattedFilename, $category, $models] ;
         }
         elseif (Crud::PAGE_DETAIL === $pageName) {
-            return [$id, $formattedFilename, $category, $models] ;
+            return [$id, $formattedFilename, $category, $formattedModels] ;
         }
         elseif (Crud::PAGE_NEW === $pageName) {
             return [$filename, $category, $models] ;

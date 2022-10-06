@@ -26,7 +26,7 @@ class DeviceModelCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Modèles')
             ->setPageTitle('new', 'Ajouter un %entity_label_singular%')
             ->setPageTitle('edit', 'Modifier le %entity_label_singular%')
-            ->setPageTitle('detail', 'Modèle : %entity_as_string%')
+            ->setPageTitle('detail', 'Modèle <span class="text-info">« %entity_as_string% »</span>')
             ;
     }
 

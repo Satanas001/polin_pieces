@@ -26,7 +26,7 @@ class DeviceTypeCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Types de matériel')
             ->setPageTitle('new', 'Ajouter un %entity_label_singular%')
             ->setPageTitle('edit', 'Modifier le %entity_label_singular%')
-            ->setPageTitle('detail', 'Type de matériel : %entity_as_string%')
+            ->setPageTitle('detail', 'Type de matériel <span class="text-info">« %entity_as_string% »</span>')
             ;
     }
 
