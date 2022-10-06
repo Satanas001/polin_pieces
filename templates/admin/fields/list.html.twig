@@ -1,0 +1,9 @@
+{% if field.value | length > 0 %}
+    <ul class="list-group-flush p-0 mb-0">
+    {% for value in field.value %}
+        <li class="list-group-item">{{ value }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <span class="badge badge-secondary">Aucun</span>
+{% endif %}

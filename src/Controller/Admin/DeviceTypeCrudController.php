@@ -22,9 +22,11 @@ class DeviceTypeCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Type de Matériel')
-            ->setEntityLabelInPlural('Types de Matériel')
+            ->setEntityLabelInSingular('type de matériel')
+            ->setEntityLabelInPlural('Types de matériel')
             ->setPageTitle('new', 'Ajouter un %entity_label_singular%')
+            ->setPageTitle('edit', 'Modifier le %entity_label_singular%')
+            ->setPageTitle('detail', 'Type de matériel <span class="text-info">« %entity_as_string% »</span>')
             ;
     }
 
@@ -60,6 +62,7 @@ class DeviceTypeCrudController extends AbstractCrudController
                     ->setLabel('Ajouter') ;
             })
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->add(Crud::PAGE_NEW, Action::INDEX)
             ->update(Crud::PAGE_INDEX, Action::DETAIL, function (Action $action) {
                 return $action
                     ->setIcon('fa-regular fa-eye me-1 text-success')

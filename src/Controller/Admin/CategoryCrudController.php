@@ -21,9 +21,11 @@ class CategoryCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Catégorie')
+            ->setEntityLabelInSingular('catégorie')
             ->setEntityLabelInPlural('Catégories')
             ->setPageTitle('new', 'Ajouter une %entity_label_singular%')
+            ->setPageTitle('edit', 'Modifier la %entity_label_singular%')
+            ->setPageTitle('detail', 'Catégorie <span class="text-info">« %entity_as_string% »</span>')
             ;
     }
     
@@ -51,6 +53,7 @@ class CategoryCrudController extends AbstractCrudController
         return $actions
             ->disable(Action::SAVE_AND_CONTINUE)
             ->disable(Action::SAVE_AND_ADD_ANOTHER)
+            ->add(Crud::PAGE_NEW, Action::INDEX)
             ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
                 return $action
                     ->setIcon('fa-solid fa-plus me-1')

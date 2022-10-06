@@ -22,7 +22,8 @@ class DeviceModel
     #[ORM\JoinColumn(nullable: false)]
     private ?DeviceType $deviceType = null;
 
-    #[ORM\ManyToMany(targetEntity: Document::class, inversedBy: 'deviceModels')]
+    // #[ORM\ManyToMany(targetEntity: Document::class, inversedBy: 'deviceModels')]
+    #[ORM\ManyToMany(targetEntity: Document::class, mappedBy: 'deviceModels')]
     private Collection $documents;
 
     #[ORM\ManyToMany(targetEntity: SparePart::class, mappedBy: 'device')]

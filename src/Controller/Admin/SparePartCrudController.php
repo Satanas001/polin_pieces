@@ -28,10 +28,11 @@ class SparePartCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('reference', 'Référence'),
             TextField::new('designation', 'Désignation'),
-            TextEditorField::new('description'),
+            TextEditorField::new('description')
+                ->setTemplatePath('admin/fields/text_editor.html.twig'),
             MoneyField::new('unitPrice','Prix unitaire')
                 ->setCurrency('EUR')
-                ->setNumDecimals(2),
+                ->setStoredAsCents(),
             ImageField::new('image', 'Image')
                 ->setBasePath(self::DOCUMENTS_BASE_PATH)
                 ->setUploadDir(self::DOCUMENTS_UPLOAD_DIR),
