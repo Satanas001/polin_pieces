@@ -46,6 +46,7 @@ class SparePart
     {
         return $this->id;
     }
+   
 
     public function getReference(): ?string
     {

@@ -8,17 +8,21 @@
           <a class="navbar-brand text-uppercase fs-1 fw-bold " href="{{path('main_index')}}">Accueil</a>
         </div>
       </nav>
-
+      
 
  
       <div class="container">
 
-
+    
         <div class=" row vh-100 align-items-center">
 
-     
   
         <div class="row">
+            {% for message in app.flashes('warning') %}
+            <div class="alert alert-warning text-center">
+                {{ message }}
+            </div>
+        {% endfor %}
                     <!-- CATEGORIE -->
 
                     <div class="col-md-12 col-lg-6 mb-4 d-grid">
@@ -37,9 +41,9 @@
                        
                     <div class=" text-center col-md-12 col-lg-6 align-self-center "> 
                         <p class="my-sm-6 lead">Acceder directement à la rèférence :  </p>
-                    <input type="text" class="form-control text-center" placeholder="référence article">
-    
-                    <a href="#"> <button type="button" class="btn btn-secondary mt-4 ">Enter</button></a> 
+                            
+                              {{ form(form) }}    
+                              
                     </div> 
                    
         </div> 
