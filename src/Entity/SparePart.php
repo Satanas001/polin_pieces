@@ -22,8 +22,8 @@ class SparePart
     #[ORM\Column(length: 100)]
     private ?string $designation = null;
  
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
-    private ?string $unitPrice = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $unitPrice = null;
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $image = null;
@@ -142,5 +142,10 @@ class SparePart
         $this->device->removeElement($device);
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return sprintf('%s - %s', $this->getReference(), $this->getDesignation()) ;
     }
 }
