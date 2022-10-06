@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+ {% include "components/header.html.twig" %}
+<section> 
+    <div class="container">
+        <div class=" row vh-100 align-items-center"> 
+                <div class="row">
+
+                    <div class="col-md-6 text-center"> <img class="img-fluid"
+                            src="{{ asset('images/parts/' ~  sparePart.image) }}">
+
+                    </div>
+      
+                      <div class="col-md-6">
+                       
+                            <div class="my-5 text-sm-center text-center">
+                                <h1>{{sparePart.reference }}</h1>
+                            </div>
+
+                               <p class=""> {{sparePart.designation }}</p>
+                          <div class="">
+                            <p class="text-muted "> {{sparePart.description }}</p>
+                         </div>
+                        <h4 class="my-4 text-center">Prix public HT: {{sparePart.unitPrice  / 100}} €</h4>
+                            <h4 class="my-4 text-center"> Quantité : <input type="number" class="bg-light w-25"></h4>
+                            
+                        <div class="my-4 text-center text-sm-end">
+                                    <button type="button" class="btn btn-warning btn-lg">
+                                        <a class="nav-link  "  href="#">PANIER</a></button>
+                        </div>
+                   </div>
+                
+              </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

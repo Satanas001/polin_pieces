@@ -21,6 +21,7 @@ class SparePartRepository extends ServiceEntityRepository
         parent::__construct($registry, SparePart::class);
     }
 
+
     public function add(SparePart $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
