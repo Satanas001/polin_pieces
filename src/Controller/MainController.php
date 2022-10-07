@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\SparePart;
-use App\Form\SearchFormType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,7 +26,7 @@ class MainController extends AbstractController
             
 
                 $categories = $this->categoryRepository->findBy([] , ['designation' => 'ASC']  );
-
+                    // Forms
                 $form = $this->createFormBuilder(null)
                 ->add('search', TextType ::class,[
                     'attr' => ['class' =>'form-control form-control-lg  text-center ',
@@ -45,10 +45,11 @@ class MainController extends AbstractController
 
                 $serchbyReference = $request->get('form');
 
-              $reference = $sparePartRepository->findOneByReference($serchbyReference);
+               $reference = $sparePartRepository->findOneByReference($serchbyReference);
 
-              $form->handleRequest($request);
-              if($form->isSubmitted() && $form->isValid()) {
+                        // Submit 
+                 $form->handleRequest($request);
+                 if($form->isSubmitted() && $form->isValid()) {
                
                   if( $reference  ){
                       // todo faire une redirection vers la page detail avec lid 
@@ -61,10 +62,12 @@ class MainController extends AbstractController
                   }
             }
         
+                    //  Affichage 
+
                 return $this->render('main/index.html.twig', [
                     'categories' => $categories,
                     'form' => $form->createView(),
-                
+                    
                 ]);
             }
 
