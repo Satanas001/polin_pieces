@@ -73,4 +73,9 @@ class QuotationPart
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getPart().' - Qté x '.$this->getQuantity() ;
+    }
 }

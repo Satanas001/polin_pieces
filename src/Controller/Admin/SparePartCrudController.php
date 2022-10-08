@@ -42,7 +42,7 @@ class SparePartCrudController extends AbstractCrudController
         $id = IdField::new('id') ;
         $reference = TextField::new('reference', 'Référence') ;
         $designation = TextField::new('designation', 'Désignation') ;
-        $description = TextEditorField::new('description')
+        $description = TextEditorField::new('description', 'Description')
             ->setTemplatePath('admin/fields/text_editor.html.twig') ;
         $price = MoneyField::new('unitPrice','Prix unitaire')
             ->setCurrency('EUR')
