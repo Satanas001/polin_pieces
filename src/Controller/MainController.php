@@ -37,7 +37,7 @@ class MainController extends AbstractController
             ])
             ->add('Enter', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-secondary mt-4',
+                    'class' => 'btn btn-success mt-4',
                 ],
                 'label' => 'VALIDER'
             ])
@@ -66,7 +66,7 @@ class MainController extends AbstractController
         return $this->render('main/index.html.twig', [
             'categories' => $categories,
             'form' => $form->createView(),
-
+            'pageName' => 'Accueil'
         ]);
     }
 }
