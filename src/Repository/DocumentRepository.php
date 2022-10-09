@@ -39,6 +39,13 @@ class DocumentRepository extends ServiceEntityRepository
         }
     }
 
+    public function documentCount() {
+        return $this->createQueryBuilder('d')
+            ->select('count(d.id) as nb')
+            ->getQuery()
+            ->getSingleScalarResult() ;
+    }
+
 //    /**
 //     * @return Document[] Returns an array of Document objects
 //     */

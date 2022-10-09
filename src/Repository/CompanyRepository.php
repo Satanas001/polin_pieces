@@ -39,6 +39,13 @@ class CompanyRepository extends ServiceEntityRepository
         }
     }
 
+    public function companyCount() {
+        return $this->createQueryBuilder('c')
+            ->select('count(c.id) as nb')
+            ->getQuery()
+            ->getSingleScalarResult() ;
+    }
+
 //    /**
 //     * @return Company[] Returns an array of Company objects
 //     */

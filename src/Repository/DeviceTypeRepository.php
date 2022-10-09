@@ -39,6 +39,13 @@ class DeviceTypeRepository extends ServiceEntityRepository
         }
     }
 
+    public function typeCount() {
+        return $this->createQueryBuilder('d')
+            ->select('count(d.id) as nb')
+            ->getQuery()
+            ->getSingleScalarResult() ;
+    }
+
 //    /**
 //     * @return DeviceType[] Returns an array of DeviceType objects
 //     */

@@ -40,6 +40,15 @@ class SparePartRepository extends ServiceEntityRepository
         }
     }
 
+    public function partCount()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('count(p.id) as nb')
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
 //    /**
 //     * @return SparePart[] Returns an array of SparePart objects
 //     */

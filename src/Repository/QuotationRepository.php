@@ -39,6 +39,22 @@ class QuotationRepository extends ServiceEntityRepository
         }
     }
 
+    public function quotationCount() {
+        return $this->createQueryBuilder('q')
+            ->select('count(q.id) as nb')
+            ->getQuery()
+            ->getSingleScalarResult() ;
+    }
+
+    public function quotationNotValidatedCount() {
+        return $this->createQueryBuilder('q')
+            ->select('count(q.id) as nb')
+            ->where('q.status = 0')
+            ->getQuery()
+            ->getSingleScalarResult() 
+            ;
+    }
+
 //    /**
 //     * @return Quotation[] Returns an array of Quotation objects
 //     */

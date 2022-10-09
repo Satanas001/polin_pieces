@@ -6,11 +6,20 @@ use App\Entity\User;
 use App\Entity\Company;
 use App\Entity\Category;
 use App\Entity\Document;
+use App\Entity\Quotation;
+use App\Entity\SparePart;
 use App\Entity\DeviceType;
 use App\Entity\DeviceModel;
 use App\Entity\DocumentCategory;
-use App\Entity\Quotation;
-use App\Entity\SparePart;
+use App\Repository\UserRepository;
+use App\Repository\CompanyRepository;
+use App\Repository\CategoryRepository;
+use App\Repository\DocumentRepository;
+use App\Repository\SparePartRepository;
+use App\Repository\DeviceTypeRepository;
+use App\Repository\DeviceModelRepository;
+use App\Repository\DocumentCategoryRepository;
+use App\Repository\QuotationRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud ;
@@ -22,17 +31,40 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 class DashboardController extends AbstractDashboardController
 {
 
-    public function __construct(private AdminUrlGenerator $adminUrlGenerator) {
+    public function __construct(
+        private AdminUrlGenerator $adminUrlGenerator, 
+        private UserRepository $userRepository,
+        private CategoryRepository $categoryRepository,
+        private DeviceTypeRepository $deviceTypeRepository,
+        private DeviceModelRepository $deviceModelRepository,
+        private SparePartRepository $sparePartRepository,
+        private DocumentCategoryRepository $documentCategoryRepository,
+        private DocumentRepository $documentRepository,
+        private CompanyRepository $companyRepository,
+        private QuotationRepository $quotationRepository,
+        ) {
     }
 
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        $url = $this->adminUrlGenerator
-            ->setController(CategoryCrudController::class)
-            ->generateUrl() ;
+        // $url = $this->adminUrlGenerator
+        //     ->setController(CategoryCrudController::class)
+        //     ->generateUrl() ;
 
-        return $this->redirect($url);
+        // return $this->redirect($url);
+        return $this->render('admin/home_admin.html.twig', [
+            'userCount' => $this->userRepository->userCount(),
+            'categoryCount' => $this->categoryRepository->categoryCount(),
+            'typeCount' => $this->deviceTypeRepository->typeCount(),
+            'modelCount' => $this->deviceModelRepository->modelCount(),
+            'partCount' => $this->sparePartRepository->partCount(),
+            'documentCategoryCount' => $this->documentCategoryRepository->categoryCount(),
+            'documentCount' => $this->documentRepository->documentCount(),
+            'companyCount' => $this->companyRepository->companyCount(),
+            'quotationCount' => $this->quotationRepository->quotationCount(),
+            'quotationNotValidatedCount' => $this->quotationRepository->quotationNotValidatedCount(),
+        ]) ;
     }
 
     public function configureDashboard(): Dashboard
@@ -43,7 +75,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToDashboard('Accueil', 'fa fa-home');
 
         yield MenuItem::section('Matériel') ;
 
