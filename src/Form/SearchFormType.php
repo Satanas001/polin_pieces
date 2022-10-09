@@ -14,7 +14,9 @@ class SearchFormType extends AbstractType
         $builder
             ->add('reference',null,
             [
-                'attr' => ['class' =>'form-control form-control-lg form-control-borderless'],
+            'attr' => [
+                'class' =>'form-control form-control-lg form-control-borderless'
+            ],
             'label' => false,
             'placeholder'=>'Article',
             ])

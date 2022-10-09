@@ -27,6 +27,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -48,11 +49,6 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        // $url = $this->adminUrlGenerator
-        //     ->setController(CategoryCrudController::class)
-        //     ->generateUrl() ;
-
-        // return $this->redirect($url);
         return $this->render('admin/home_admin.html.twig', [
             'userCount' => $this->userRepository->userCount(),
             'categoryCount' => $this->categoryRepository->categoryCount(),
@@ -70,7 +66,8 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Polin Pieces');
+            ->setTitle('Polin Pieces')
+            ;
     }
 
     public function configureMenuItems(): iterable

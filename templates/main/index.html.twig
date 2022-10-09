@@ -1,54 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Acceuil{% endblock %}
+{% block title %}{{ parent() }} - Accueil{% endblock %}
 
 {% block body %}
     <nav class="navbar">
         <div class="container justify-content-end fixed-top">
-          <a class="navbar-brand text-uppercase fs-1 fw-bold " href="{{path('main_index')}}">Accueil</a>
+            <a class="navbar-brand text-uppercase fs-1 fw-bold " href="{{path('main_index')}}">Accueil</a>
         </div>
-      </nav>
-      
-
- 
-      <div class="container">
-
+    </nav>
     
+    <div class="container">
         <div class=" row vh-100 align-items-center">
-
-  
-        <div class="row">
-            {% for message in app.flashes('warning') %}
-            <div class="alert alert-warning text-center">
-                {{ message }}
-            </div>
-        {% endfor %}
-                    <!-- CATEGORIE -->
-
-                    <div class="col-md-12 col-lg-6 mb-4 d-grid">
-                        <div class="row">              
-                 {% for category in categories %}
-                <div class="col-md-12 col-lg-6 text-bg-primary"> 
+            <div class="row">
+                {% for type, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{type}} text-center">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                
+                <!-- CATEGORIE -->
+                <div class="col-md-12 col-lg-6 mb-4 d-grid">
+                    <div class="row">              
+                        {% for category in categories %}
+                            <div class="col-md-12 col-lg-6 text-bg-primary"> 
                                 <div class=" p-md-5   m-1">
                                     <a href="#" class="text-center text-white fs-1 fw-bold display-6 ">{{ category.designation }}</a>
                                 </div>
-                         </div>
-                    {% endfor %}
-                          
                             </div>
+                        {% endfor %}
                     </div>
-                        <!-- reference -->
-                       
-                    <div class=" text-center col-md-12 col-lg-6 align-self-center "> 
-                        <p class="my-sm-6 lead">Acceder directement à la rèférence :  </p>
-                            
-                              {{ form(form) }}    
-                              
-                    </div> 
-                   
-        </div> 
-        
-  </div>
-  </div>
-  
+                </div>
+                
+                <!-- REFERENCE -->
+                <div class=" text-center col-md-12 col-lg-6 align-self-center "> 
+                    <p class="my-sm-6 lead">Acceder directement à la rèférence :  </p>
+                    {{ form(form) }}    
+                </div> 
+            </div> 
+        </div>
+    </div>
 {% endblock %}
