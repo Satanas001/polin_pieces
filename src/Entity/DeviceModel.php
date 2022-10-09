@@ -133,4 +133,6 @@ class DeviceModel
 
         return $this;
     }
+
+
 }

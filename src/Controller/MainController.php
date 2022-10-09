@@ -21,11 +21,9 @@ class MainController extends AbstractController
     }
 
             #[Route('', name: 'main_index')]
-            public function index( Request $request,SparePartRepository $sparePartRepository ): Response
+            public function index( Request $request,SparePartRepository $sparePartRepository,CategoryRepository $categoryRepository  ): Response
             {
-            
-
-                $categories = $this->categoryRepository->findBy([] , ['designation' => 'ASC']  );
+                
                     // Forms
                 $form = $this->createFormBuilder(null)
                 ->add('search', TextType ::class,[
@@ -65,7 +63,7 @@ class MainController extends AbstractController
                     //  Affichage 
 
                 return $this->render('main/index.html.twig', [
-                    'categories' => $categories,
+                    'categories' => $categoryRepository->findBy([] , ['designation' => 'ASC']  ),
                     'form' => $form->createView(),
                     
                 ]);

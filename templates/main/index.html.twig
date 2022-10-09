@@ -28,10 +28,29 @@
                     <div class="col-md-12 col-lg-6 mb-4 d-grid">
                         <div class="row">              
                  {% for category in categories %}
-                <div class="col-md-12 col-lg-6 text-bg-primary"> 
-                                <div class=" p-md-5   m-1">
-                                    <a href="#" class="text-center text-white fs-1 fw-bold display-6 ">{{ category.designation }}</a>
+                <div class="col-md-12 col-lg-6 my-1 "> 
+    {% if category.designation == "Ram" %}
+                                   <div class=" p-md-5 m-3 bg-warning h-100 text-center">
+                                    <a href="{{ path('category_index', {designation:category.designation }) }}" class="text-center text-white fs-1 fw-bold display-6  ">{{ category.designation | upper }}</a>
                                 </div>
+       {% elseif category.designation == "Mixer"  %}
+                     
+                                   <div class=" p-md-5 m-3 bg-dark h-100 text-center">
+                                    <a href="{{ path('category_index', {designation:category.designation }) }}" class=" text-white fs-1 fw-bold display-6 ">{{ category.designation  | upper }}</a>
+                                </div>
+        {% elseif category.designation == "Polin"  %}
+                     
+                                   <div class=" p-md-5 m-3 bg-secondary h-100 text-center">
+                                    <a href="{{ path('category_index', {designation:category.designation }) }}" class="text-center text-white fs-1 fw-bold display-6 ">{{ category.designation  | upper }}</a>
+                                </div>
+       {% elseif category.designation == "Toiles Tapis"  %}
+                     
+                                   <div class=" p-md-5 m-3 bg-success h-100 text-center">
+                                    <a href="{{ path('category_index', {designation:category.designation }) }}" class="text-center text-white fs-1 fw-bold display-6 ">{{ category.designation  | upper }}</a>
+                                </div>
+        {% endif %}
+
+                                
                          </div>
                     {% endfor %}
                           

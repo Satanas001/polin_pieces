@@ -5,7 +5,7 @@
 {% block body %}
 <nav class="navbar navbar-expand-lg bg-dark py-0 px-0 fixed-top">
         <div class="container-fluid px-0  ">
-            <div> <a class="navbar-brand text-white mx-3 fw-bold fs-2 " href="#">{{sparePart.designation |upper }}</a></div>
+            <div> <a class="navbar-brand text-white mx-3 fw-bold fs-2 " href="{{path('main_index')}}">{{sparePart.designation |upper }}</a></div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -34,9 +34,8 @@
                 </ul>
             </div>
         </div>
-
     </nav>
- 
+
         <!-- section  -->
     <div class="container d-flex flex-column  d-flex flex-wrap my-5 ">
         <div class=" row vh-100 align-items-center ">
@@ -50,41 +49,44 @@
                                  
                 </div>
 
-                <!--  reference -->
-                
+                <!--  rechercher -->
+              
                 <div class="col-sm  mx-2"> 
                                 <div class=" ">
 
-                                    <select class="form-select  mt-5 my-sm-2 text-center" aria-label="Default select example">
+                     {# <select class="form-select  mt-5 my-sm-2 text-center" aria-label="Default select example" name="deviceType[]" id="filters">
                                         <option selected>type machin/liste</option>
-                                        <option value="1">{{deviceType.designation }}</option>
-                                        <option value="2">{{deviceType.designation }}</option>
-                                      </select>
-                                     
-                                            <input type="text" class="form-control text-center my-3" placeholder="matricule machine ">
-                                            {{ form(form) }}
+                                        {% for device in deviceModel %}
+                                                                <option value="1">{{device.designation}}</option>
+                                                            
+                                        {% endfor %}
+                                    
+                                        </select>
+                       #}
+                       
+                                  {# {% if deviceModel == "Ram" %} #}
+                                          {{ form_start(form) }}
+
+                                               {{ form_row(form.deviceType) }}
+                                               {{ form_row(form.matricule) }}
+                                               {{ form_row(form.reference) }}
+                                
+                                {{ form_end(form) }}
+
+                                 {# {% endif %} #}
                                         <div class="my-5 py-5"> 
                                             <img src=" {{ asset('images/parts/' ~  sparePart.image) }}" alt="polin" class="w-100">
                                         </div>
                                     </div>
                     </div>
-                 <!-- panier -->
-                <div class="col-sm mx-2  ">
-                                            <h1 class="display-6 lead">{{sparePart.reference }}</h1>
-                                            <h6>{{sparePart.designation }}</h6>
-                                            <p class="text-muted text-sm-center">   {{sparePart.description }}</p>
 
-                                            <h4 class="text-end text-sm-center mt-5 my-sm-2">Prix public HT:  {{sparePart.unitPrice  / 100}} €</h4>
-                                            <h4 class="my-4 text-center"> Quantité : <input type="number" class="bg-secondary w-25"></h4>
-                                            
-                                                <div class="my-4 text-center text-sm-end">
-                                                    <button type="button" class="btn btn-warning btn-lg">
-                                                        <a class="nav-link "  href="#">PANIER</a></button>
-                                                </div>
-                </div>
-          
-            </div>    
+                 <!-- details -->
+           <div class="col-sm mx-2  " id="details">
+                 {% include "category/category.html.twig" %}
+                 </div>  
         </div>             
     </div>
-
-    {% endblock %}
+ {% endblock %}
+    {% block javascripts %}
+    <script src="{{ asset('js/filters.js') }}"></script>
+{% endblock %}
