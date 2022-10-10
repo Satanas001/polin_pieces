@@ -24,7 +24,7 @@
                             {% if category.active == true %}
                                 <div class="col-12 col-sm-6">
                                     <div class="p-5 bg-primary text-center">
-                                        <a href="#" class="text-white text-decoration-none fw-bold display-6">{{ category.designation }}</a>
+                                        <a href="{{ path('category_index', {designation: category.designation}) }}" class="text-white text-decoration-none fw-bold display-6">{{ category.designation }}</a>
                                     </div>
                                 </div>
                             {% endif %}
