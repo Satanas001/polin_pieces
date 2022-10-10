@@ -13,6 +13,7 @@ window.onload = () => {
         fetch('/deviceType/' + value)
         .then (response => {
             deviceModel.disabled = false ;
+            console.log(response)
         })
         .catch(error => alert(error)) ;
 
