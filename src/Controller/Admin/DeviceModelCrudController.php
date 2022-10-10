@@ -3,12 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Entity\DeviceModel;
+use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
@@ -34,16 +36,23 @@ class DeviceModelCrudController extends AbstractCrudController
     {
         $id = IdField::new('id') ;
         $designation = TextField::new('designation', 'Désignation') ;
-        $deviceType = AssociationField::new('deviceType', 'Type de matériel') ;
+        $deviceType = AssociationField::new('deviceType', 'Type de matériel') 
+            ->setQueryBuilder(function (QueryBuilder $queryBuilder) {
+                $queryBuilder->where('entity.active = true') ;
+            }) ;
         $formattedActive = BooleanField::new('active', 'Actif')
             ->setTemplatePath('admin/fields/active_field.html.twig') ;
         $active = BooleanField::new('active', 'Actif') ;
+        $parts = AssociationField::new('spareParts','Pièces détachées') ;
+        $formattedParts = CollectionField::new('spareParts','Pièces détachées')
+            ->setTemplatePath('admin/fields/list.html.twig')
+             ;
 
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$id, $designation, $deviceType, $formattedActive] ;
+            return [$id, $designation, $deviceType, $parts, $formattedActive] ;
         }
         elseif (Crud::PAGE_DETAIL === $pageName) {
-            return [$id, $deviceType, $formattedActive] ;
+            return [$id, $deviceType, $formattedActive, $formattedParts] ;
         }
         else {
             return [$designation, $deviceType, $active] ;

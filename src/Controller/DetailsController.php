@@ -27,6 +27,7 @@ class DetailsController extends AbstractController
         
         return $this->render('details/index.html.twig', [
             'sparePart' => $sparePart,
+            'pageName' => 'Pièce détachée'
         ]);
     }
 

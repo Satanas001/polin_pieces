@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Document;
+use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -47,8 +48,14 @@ class DocumentCrudController extends AbstractCrudController
                     'accept' => 'application/pdf'
                 ]
             ]) ;
-        $category = AssociationField::new('category', 'Catégorie') ;
-        $models = AssociationField::new('deviceModels','Modèles') ;
+        $category = AssociationField::new('category', 'Catégorie') 
+            ->setQueryBuilder(function (QueryBuilder $queryBuilder) {
+                $queryBuilder->where('entity.active = true') ;
+            }) ;
+        $models = AssociationField::new('deviceModels','Modèles') 
+            ->setQueryBuilder(function (QueryBuilder $queryBuilder) {
+                $queryBuilder->where('entity.active = true') ;
+            }) ;
         $formattedModels = CollectionField::new('deviceModels','Modèles')
             ->setTemplatePath('admin/fields/list.html.twig') ;
         

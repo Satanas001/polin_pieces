@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Connexion{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row vh-100 align-items-center m-2 m-lg-5 ">
+            <div class="col-12 col-lg-6 d-flex justify-content-center">
+                <img src="{{ asset('images/logo-polin.png') }}" class="img-fluid" alt="Logo Polin">
+            </div>
+            <div class="col-12 col-lg-6">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+                <form method="post">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <div class="mb-3">
+                        <input type="email" value="{{ lastUsername }}" name="email" id="inputEmail" class="form-control text-center" autocomplete="email" required autofocus placeholder="Adresse mail">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" name="password" id="inputPassword" class="form-control text-center" autocomplete="current-password" required placeholder="Mot de passe">
+                    </div>
+                    {# <p class="h4 py-3 text-end">Mot de passe oublié</p> #}
+                    <div>
+                        <button type="submit" class="btn btn-primary w-100">Connexion</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

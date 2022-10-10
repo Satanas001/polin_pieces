@@ -1,73 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Acceuil{% endblock %}
+{% block title %}{{ parent() }} - Accueil{% endblock %}
 
 {% block body %}
-    <nav class="navbar">
-        <div class="container justify-content-end fixed-top">
-          <a class="navbar-brand text-uppercase fs-1 fw-bold " href="{{path('main_index')}}">Accueil</a>
-        </div>
-      </nav>
-      
-
- 
-      <div class="container">
-
     
+    {% include 'components/header.html.twig' %}
+    
+    <div class="container mt-5 mt-sm-0">
         <div class=" row vh-100 align-items-center">
-
-  
-        <div class="row">
-            {% for message in app.flashes('warning') %}
-            <div class="alert alert-warning text-center">
-                {{ message }}
-            </div>
-        {% endfor %}
-                    <!-- CATEGORIE -->
-
-                    <div class="col-md-12 col-lg-6 mb-4 d-grid">
-                        <div class="row">              
-                 {% for category in categories %}
-                <div class="col-md-12 col-lg-6 my-1 "> 
-    {% if category.designation == "Ram" %}
-                                   <div class=" p-md-5 m-3 bg-warning h-100 text-center">
-                                    <a href="{{ path('category_index', {designation:category.designation }) }}" class="text-center text-white fs-1 fw-bold display-6  ">{{ category.designation | upper }}</a>
-                                </div>
-       {% elseif category.designation == "Mixer"  %}
-                     
-                                   <div class=" p-md-5 m-3 bg-dark h-100 text-center">
-                                    <a href="{{ path('category_index', {designation:category.designation }) }}" class=" text-white fs-1 fw-bold display-6 ">{{ category.designation  | upper }}</a>
-                                </div>
-        {% elseif category.designation == "Polin"  %}
-                     
-                                   <div class=" p-md-5 m-3 bg-secondary h-100 text-center">
-                                    <a href="{{ path('category_index', {designation:category.designation }) }}" class="text-center text-white fs-1 fw-bold display-6 ">{{ category.designation  | upper }}</a>
-                                </div>
-       {% elseif category.designation == "Toiles Tapis"  %}
-                     
-                                   <div class=" p-md-5 m-3 bg-success h-100 text-center">
-                                    <a href="{{ path('category_index', {designation:category.designation }) }}" class="text-center text-white fs-1 fw-bold display-6 ">{{ category.designation  | upper }}</a>
-                                </div>
-        {% endif %}
-
-                                
-                         </div>
+            <div class="row gx-5">
+                {% for type, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{type}} text-center">
+                            {{ message }}
+                        </div>
                     {% endfor %}
-                          
-                            </div>
+                {% endfor %}
+                
+                <!-- CATEGORIE -->
+                <div class="col-12 col-md-6 mb-4">
+                    <div class="row g-4">                 
+                        {% for category in categories %}
+                            {% if category.active == true %}
+                                <div class="col-12 col-sm-6">
+                                    <div class="p-5 bg-primary text-center">
+                                        <a href="#" class="text-white text-decoration-none fw-bold display-6">{{ category.designation }}</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
-                        <!-- reference -->
-                       
-                    <div class=" text-center col-md-12 col-lg-6 align-self-center "> 
-                        <p class="my-sm-6 lead">Acceder directement à la rèférence :  </p>
-                            
-                              {{ form(form) }}    
-                              
-                    </div> 
-                   
-        </div> 
-        
-  </div>
-  </div>
-  
+                </div>
+                
+                <!-- REFERENCE -->
+                <div class="text-center col-12 col-md-6 align-self-center "> 
+                    <p class="my-sm-6 lead">Acceder directement à la référence :  </p>
+                    {{ form(form) }}    
+                </div> 
+            </div> 
+        </div>
+    </div>
 {% endblock %}

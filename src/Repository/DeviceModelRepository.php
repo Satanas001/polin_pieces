@@ -39,6 +39,13 @@ class DeviceModelRepository extends ServiceEntityRepository
         }
     }
 
+    public function modelCount() {
+        return $this->createQueryBuilder('m')
+            ->select('count(m.id) as nb')
+            ->getQuery()
+            ->getSingleScalarResult() ;
+    }
+
 //    /**
 //     * @return DeviceModel[] Returns an array of DeviceModel objects
 //     */

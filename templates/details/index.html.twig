@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Panier{% endblock %}
+{% block title %}{{ parent() }} - Pièce détachée{% endblock %}
 
 {% block body %}
  {% include "components/header.html.twig" %}
@@ -8,32 +8,37 @@
     <div class="container">
         <div class=" row vh-100 align-items-center"> 
                 <div class="row">
-
-                    <div class="col-md-6 text-center"> <img class="img-fluid"
-                            src="{{ asset('images/parts/' ~  sparePart.image) }}">
-
-                    </div>
-      
-                      <div class="col-md-6">
                        
-                            <div class="my-5 text-sm-center text-center">
-                                <h1>{{sparePart.reference }}</h1>
-                            </div>
-
-                               <p class=""> {{sparePart.designation }}</p>
-                          <div class="">
-                            <p class="text-muted "> {{sparePart.description }}</p>
-                         </div>
-                        <h4 class="my-4 text-center">Prix public HT: {{sparePart.unitPrice  / 100}} €</h4>
-                            <h4 class="my-4 text-center"> Quantité : <input type="number" class="bg-light w-25"></h4>
-                            
-                        <div class="my-4 text-center text-sm-end">
-                                    <button type="button" class="btn btn-warning btn-lg">
-                                        <a class="nav-link  "  href="#">PANIER</a></button>
-                        </div>
-                   </div>
-                
-              </div>
+                    <div class="col-md-6 text-center d-flex align-items-center"> 
+                         {% if sparePart.image %}
+                                 <img class="img-fluid"src="{{ asset('images/parts/' ~  sparePart.image) }}">
+                         {% else %}
+                                    <img src="{{ asset('images/image_ind.png') }}" class="img-fluid" alt="Logo Polin">
+                         {% endif %}
+                           </div>
+                      <div class="col-md-6">
+                                    <div class="my-5 text-sm-center text-center">
+                                            <h2 class="h1">{{sparePart.reference }}</h2>
+                                    </div>
+                         {% if sparePart.isEnabled == false %}
+                                   <p class="alert alert-danger text-center h4 ">Cet article n'est plus disponible </p>
+                         {% endif %}
+                                    <p class="text-success fw-bold fs-2"> {{sparePart.designation }}</p>
+                                    <div class="">
+                                            <p class="text-muted fs-5  "> {{sparePart.description|raw  }}</p>
+                       
+                                    </div>
+                                   
+                                    <h4 class="my-4 text-center">Prix public HT: {{sparePart.unitPrice   ? sparePart.unitPrice / 100 ~ ' €'  : '<span class="text-danger mx-3">Nous consulter</span>' }} </h4>
+                                    <h4 class="my-4 text-center"> Quantité : <input type="number" class="bg-light w-25"></h4>
+                                        
+                                    <div class="my-4 text-center text-sm-end">
+                                            <button type="button" class="btn btn-success me-3 btn-lg">
+                                                    <a class="nav-link  "  href="#"> Ajouter au panier</a>
+                                            </button>
+                                    </div>
+                       </div>
+               </div>
         </div>
     </div>
 </section>

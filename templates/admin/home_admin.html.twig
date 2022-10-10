@@ -1,0 +1,66 @@
+{% extends '@!EasyAdmin/layout.html.twig' %}
+
+{% block sidebar %}
+    {{ parent()}}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-3 ">
+        <div class="row g-4">
+            <div class="col-3">
+                <div class="alert alert-primary h4">
+                    <span class="display-4 fw-semibold">{{categoryCount}}</span> Catégories
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="alert alert-primary h4">
+                    <span class="display-4 fw-semibold">{{typeCount}}</span> Types de matériel
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="alert alert-primary h4">
+                    <span class="display-4 fw-semibold">{{modelCount}}</span> Modèles
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="alert alert-primary h4">
+                    <span class="display-4 fw-semibold">{{partCount}}</span> Pièces détachées
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="alert alert-warning h4">
+                    <span class="display-4 fw-semibold">{{documentCategoryCount}}</span> Types de document
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="alert alert-warning h4">
+                    <span class="display-4 fw-semibold">{{documentCount}}</span> Documents
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="alert alert-info h4">
+                    <span class="display-4 fw-semibold">{{companyCount}}</span> Sociétés
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="alert alert-info h4">
+                    <span class="display-4 fw-semibold">{{userCount}}</span> Utilisateurs
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="alert alert-success h4">
+                    <span class="display-4 fw-semibold">{{quotationCount}}</span> Devis
+                </div>
+            </div>
+            {% if quotationNotValidatedCount > 0 %}
+                <div class="col-3">
+                    <div class="alert alert-danger h4">
+                        <span class="display-4 fw-semibold">{{quotationNotValidatedCount}}</span> Devis non validés
+                    </div>
+                </div>
+            {% endif %}
+            
+        </div>
+    </div>
+    
+{% endblock %}

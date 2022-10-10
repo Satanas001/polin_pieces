@@ -39,6 +39,13 @@ class DocumentCategoryRepository extends ServiceEntityRepository
         }
     }
 
+    public function categoryCount() {
+        return $this->createQueryBuilder('c')
+            ->select('count(c.id) as nb')
+            ->getQuery()
+            ->getSingleScalarResult() ;
+    }
+
 //    /**
 //     * @return DocumentCategory[] Returns an array of DocumentCategory objects
 //     */
