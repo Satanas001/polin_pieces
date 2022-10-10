@@ -25,7 +25,8 @@ class MainController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function index(Request $request, SparePartRepository $sparePartRepository): Response
     {
-        $categories = $this->categoryRepository->findBy([], ['designation' => 'ASC']);
+        $categories = $this->categoryRepository->findAll();
+        // ([], ['designation' => 'ASC','isEnabled']);
 
         $form = $this->createFormBuilder(null)
             ->add('search', TextType::class, [

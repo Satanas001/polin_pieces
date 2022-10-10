@@ -19,13 +19,15 @@
                 
                 <!-- CATEGORIE -->
                 <div class="col-12 col-md-6 mb-4">
-                    <div class="row g-4">              
+                    <div class="row g-4">                 
                         {% for category in categories %}
-                            <div class="col-12 col-sm-6">
-                                <div class="p-5 bg-primary text-center">
-                                    <a href="#" class="text-white text-decoration-none fw-bold display-6">{{ category.designation }}</a>
+                            {% if category.active == true %}
+                                <div class="col-12 col-sm-6">
+                                    <div class="p-5 bg-primary text-center">
+                                        <a href="#" class="text-white text-decoration-none fw-bold display-6">{{ category.designation }}</a>
+                                    </div>
                                 </div>
-                            </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
