@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -49,7 +50,10 @@ class UserCrudController extends AbstractCrudController
         $phone = TelephoneField::new('phone','Téléphone') ;
         $formattedPhone = TelephoneField::new('phone','Téléphone')
             ->setTemplatePath('admin/fields/text_field.html.twig') ;
-        $company = AssociationField::new('company', 'Société') ;
+        $company = AssociationField::new('company', 'Société') 
+            ->setQueryBuilder(function (QueryBuilder $queryBuilder) {
+                $queryBuilder->where('entity.active = true') ;
+            }) ;
         $roles = ArrayField::new('roles','Role') ;
         $formattedActive = BooleanField::new('status', 'Actif')
             ->setTemplatePath('admin/fields/active_field.html.twig') ;

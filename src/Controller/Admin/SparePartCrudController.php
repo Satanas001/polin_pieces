@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\SparePart;
+use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -53,7 +54,10 @@ class SparePartCrudController extends AbstractCrudController
         $formattedActive = BooleanField::new('isEnabled', 'Actif')
             ->setTemplatePath('admin/fields/active_field.html.twig') ;
         $active = BooleanField::new('isEnabled', 'Actif') ;
-        $devices = AssociationField::new('device','Modèle') ;
+        $devices = AssociationField::new('device','Modèle') 
+            ->setQueryBuilder(function (QueryBuilder $queryBuilder) {
+                $queryBuilder->where('entity.active = true') ;
+            }) ;
         $formattedDevices = CollectionField::new('device','Modèles')
             ->setTemplatePath('admin/fields/list.html.twig') ;
 
