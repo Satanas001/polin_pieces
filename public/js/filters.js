@@ -1,39 +1,28 @@
 window.onload = () => {
-    const FiltersForm = document.querySelector("#filters");
+    const deviceType = document.querySelector('#deviceType') ;
+    const deviceModel = document.querySelector('#deviceModel') ;
+    const sparePart = document.querySelector('#sparePart') ;
+    
+    deviceType.addEventListener("change", (event) => {
+        const value = event.target.value ;
+        const Params = new URLSearchParams() ;
+        const Url = new URL(window.location.href) ;
+        
+        Params.append('type', value) ;
 
-    // On boucle sur les input
-    document.querySelectorAll("#filters option").forEach(option => {
-        option.addEventListener("change", () => {
-           
-            // On récupère les données du formulaire
-            const Form = new FormData(FiltersForm);
+        fetch('/deviceType/' + value)
+        .then (response => {
+            deviceModel.disabled = false ;
+        })
+        .catch(error => alert(error)) ;
 
-            // On fabrique la "queryString"
-            const Params = new URLSearchParams();
+    }) ;
 
-            Form.forEach((value, key) => {
-                Params.append(key, value);
-            });
+    deviceModel.addEventListener("change", (event) => {
+        
+    }) ;
 
-            // On récupère l'url active
-            const Url = new URL(window.location.href);
-
-            // On lance la requête ajax
-            fetch(Url.pathname + "?" + Params.toString() + "&ajax=1", {
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest"
-                }
-            }).then(response =>
-                response.json()
-            ).then(data => {
-                // On va chercher la zone de contenu
-                const details = document.querySelector("#details");
-
-                // On remplace le contenu
-                details.innerHTML = data.details;
-
-            }).catch(e => alert(e));
-
-        });
-    });
+    sparePart.addEventListener("change", (event) => {
+        
+    }) ;
 }

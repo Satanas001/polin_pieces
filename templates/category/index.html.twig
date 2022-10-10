@@ -4,59 +4,53 @@
 
 {% block body %}
 
-{% include "components/header.html.twig" %}
+    {% include "components/header.html.twig" %}
 
-        <!-- section  -->
     <div class="container d-flex flex-column  d-flex flex-wrap my-5 ">
-        <div class=" row vh-100 align-items-center ">
-        <div class="row ">
+        <div class="row vh-100 align-items-center ">
+            <div class="row ">
                 <!-- photo -->
                 <div class="col-sm mx-2">
-                                <p class="text-center"> 
-                                    <strong> (PDF éclaté machine avec références)</strong></p>
-
-                                    <img src="{{ asset('images/machine.png') }}" width="90%" height="95%" alt="pieces">
-                                 
+                    <img src="{{ asset('images/machine.png') }}" alt="pieces" class="img-fluid">             
+                </div>
+                <!--  form -->
+                <div class="col-sm  mx-2">
+                    <div class=" ">
+                        <form id="filters">
+                            <div class="mb-3">
+                                <select class="form-select" id="deviceType" name="deviceType">
+                                    <option selected disabled>Choisissez le type d'appareil</option>
+                                    {% for deviceType in category.deviceTypes %}
+                                        <option value="{{ deviceType.id }}">{{ deviceType.designation }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select text-muted" id="deviceModel" name="deviceModel" disabled>
+                                    <option selected>Choisissez le modèle</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select text-muted" id="sparePart" name="sparePart" disabled>
+                                    <option selected>Choisissez la pièce détachée</option>
+                                </select>
+                            </div>
+                        </form>
+                        
+                        <div class="my-5 py-5"> 
+                        </div>
+                    </div>
                 </div>
 
-                <!--  rechercher -->
-              
-                <div class="col-sm  mx-2"> 
-                                <div class=" ">
-
-                     {# <select class="form-select  mt-5 my-sm-2 text-center" aria-label="Default select example" name="deviceType[]" id="filters">
-                                        <option selected>type machin/liste</option>
-                                        {% for device in deviceModel %}
-                                                                <option value="1">{{device.designation}}</option>
-                                                            
-                                        {% endfor %}
-                                    
-                                        </select>
-                       #}
-                       
-                                  {# {% if deviceModel == "Ram" %} #}
-                                          {# {{ form_start(form) }}
-
-                                               {{ form_row(form.deviceType) }}
-                                               {{ form_row(form.matricule) }}
-                                               {{ form_row(form.reference) }}
-                                
-                                {{ form_end(form) }} #}
-
-                                 {# {% endif %} #}
-                                        <div class="my-5 py-5"> 
-                                            {# <img src=" {{ asset('images/parts/' ~  sparePart.image) }}" alt="polin" class="w-100"> #}
-                                        </div>
-                                    </div>
-                    </div>
-
-                 <!-- details -->
-           <div class="col-sm mx-2  " id="details">
-                 {% include "category/category.html.twig" %}
-                 </div>  
-        </div>             
+                <!-- details -->
+                <div class="col-sm mx-2" id="details">
+                    {% include "category/category.html.twig" %}
+                </div>  
+            </div>             
+        </div>
     </div>
- {% endblock %}
-    {% block javascripts %}
+{% endblock %}
+
+{% block javascripts %}
     <script src="{{ asset('js/filters.js') }}"></script>
 {% endblock %}
