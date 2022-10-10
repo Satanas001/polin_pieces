@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Repository\SparePartRepository;
 use App\Entity\SparePart;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +16,6 @@ class DetailsController extends AbstractController
 
     }
  
-
     #[Route('/details/{reference}', name: 'details_index')]
     public function index(SparePart $sparePart = null,$reference): Response
     {

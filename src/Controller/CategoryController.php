@@ -28,6 +28,7 @@ class CategoryController extends AbstractController
 
     {
         $form = $this->createFormBuilder()
+
                             // ['deviceType'=> $deviceTypeRepository->find(2)]
                             // ->addEventListener(FormEvents ::PRE_SET_DATA,function (FormEvent $event) use ($deviceModelRepository) { 
                             //     $deviceType=($event->getData())['deviceType'] ?? null;
@@ -81,8 +82,6 @@ class CategoryController extends AbstractController
                ;
            },
            
-            
-
                 ])   
             ->add('reference', EntityType ::class,[
                 'class' => SparePart ::class,
@@ -123,7 +122,7 @@ class CategoryController extends AbstractController
         return $this->render('category/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
             'sparePart' => $sparePart,  
-            'deviceType' => $deviceTypeRepository->findAll(),
+            'deviceType' => $deviceTypeRepository,
             'deviceModel' => $deviceModel,
             'category' => $category,
             'form' => $form->createView(),
